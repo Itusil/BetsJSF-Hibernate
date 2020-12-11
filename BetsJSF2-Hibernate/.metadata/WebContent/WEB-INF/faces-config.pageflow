@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16055284818780" configfile="/BetsJSF/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="Menu.xhtml" x="252" y="156" id="pf16055294978081" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf16055294978092 pf16055295924854" inlinks="pf16056049442070" path="/Menu.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="InsertarPreguntas.xhtml" x="492" y="96" id="pf16055294978093" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf16056049442070" inlinks="pf16055294978092" path="/InsertarPreguntas.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="VerPreguntas.xhtml" x="496" y="228" id="pf16055295924855" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf16055295924854" path="/VerPreguntas.xhtml"/>
+  <links id="pf16055294978092" target="pf16055294978093" source="pf16055294978081" outcome="insertar"/>
+  <links id="pf16055295924854" target="pf16055295924855" source="pf16055294978081" outcome="ver"/>
+  <links id="pf16056049442070" target="pf16055294978081" source="pf16055294978093" outcome="menu"/>
+</pageflow:Pageflow>

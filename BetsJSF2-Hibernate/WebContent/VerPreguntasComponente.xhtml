@@ -1,0 +1,72 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>	
+<f:view>
+	<h:head>
+		<title>Aplicación JavaServer Faces</title>
+		<h:outputStylesheet library="css" name="estilos.css" />
+	</h:head>
+	<h:body>
+		<h:form>
+			<h3 class="titulo">Ver preguntas</h3>
+			<table class="centrado">
+				<tr>
+					<td class="recuadroRojo"><text class="encabezado">Fecha:</text>
+					<br></br>
+					 <p:calendar id="fecha" value="#{menuBean.fecha}"
+							navigator="false" mode="inline">
+							<p:ajax event="dateSelect" listener="#{menuBean.onDateSelect}"
+								update="tabla"></p:ajax>
+						</p:calendar>
+					</td>
+					<td><h:dataTable id="tabla" value="#{menuBean.eventos}" var="item" border="1">
+							<f:facet name="header">Eventos:</f:facet>
+							<h:column>
+								<f:facet name="header">Id</f:facet> 
+								#{item.eventNumber}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Descripcion</f:facet>
+								#{item.description}
+							</h:column>
+							<h:column>
+								<f:param name="evento" value="#{item.eventNumber}" />
+
+								<h:commandButton value="Ver preguntas"
+									action="#{menuBean.verPreguntas}" immediate="true"
+									update="tabla2">
+									<f:setPropertyActionListener target="#{menuBean.idEvento}" value="#{item.eventNumber}" />
+								</h:commandButton>
+							</h:column>
+						</h:dataTable></td>
+				</tr>
+				<tr>
+				<td></td>
+				<td><h:dataTable id="tabla2" value="#{menuBean.preguntas}" var="item2" border="1">
+						<h:column>
+							<f:facet name="header">Id pregunta</f:facet> 
+							#{item2.questionNumber}
+						</h:column>	
+						<h:column>
+							<f:facet name="header">Pregunta</f:facet> 
+							#{item2.question}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Ap. minima</f:facet> 
+							#{item2.betMinimum}
+						</h:column>	
+					</h:dataTable></td>
+				</tr>
+			</table>
+			<h:messages id="mensajes" style="color:blue" />
+		</h:form>
+	</h:body>
+</f:view>
+</ui:composition>
+</html>
