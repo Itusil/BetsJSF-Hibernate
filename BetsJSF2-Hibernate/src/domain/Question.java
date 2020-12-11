@@ -10,18 +10,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 @SuppressWarnings("serial")
-@XmlAccessorType(XmlAccessType.FIELD)
-@Entity
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@Entity
 public class Question implements Serializable {
 	
-	@Id 
-	@XmlJavaTypeAdapter(IntegerAdapter.class)
-	@GeneratedValue
+	//@Id 
+	//@XmlJavaTypeAdapter(IntegerAdapter.class)
+	//@GeneratedValue
 	private Integer questionNumber;
 	private String question; 
 	private float betMinimum;
 	private String result;  
-	@XmlIDREF
+	//@XmlIDREF
 	private Event event;
 
 	public Question(){

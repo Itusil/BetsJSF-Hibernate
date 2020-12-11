@@ -1,7 +1,9 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -13,24 +15,26 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import exceptions.QuestionAlreadyExist;
 
-@XmlAccessorType(XmlAccessType.FIELD)
-@Entity
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@Entity
 public class Event implements Serializable {
 	
-	@XmlID
-	@XmlJavaTypeAdapter(IntegerAdapter.class)
-	@Id @GeneratedValue
+	//@XmlID
+	//@XmlJavaTypeAdapter(IntegerAdapter.class)
+	//@Id @GeneratedValue
 	private Integer eventNumber;
 	private String description; 
 	private Date eventDate;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-	private Vector<Question> questions=new Vector<Question>();
+	//@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	//private Vector<Question> questions=new Vector<Question>();
+	//HAY QUE CAMBIAR VECTOR POR SET
+	private List<Question> questions = new ArrayList<Question>();
 
-	public Vector<Question> getQuestions() {
+	public List<Question> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(Vector<Question> questions) {
+	public void setQuestions(ArrayList<Question> questions) {
 		this.questions = questions;
 	}
 
