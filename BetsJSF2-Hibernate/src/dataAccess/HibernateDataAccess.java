@@ -137,4 +137,19 @@ public class HibernateDataAccess {
 		session.save(q);
 		session.getTransaction().commit();
 	}
+	
+		public List<Event> getEventsMonth(Date date) {
+		System.out.println(">> DataAccess: getEventsMonth");
+		
+		Date firstDayMonthDate= UtilDate.firstDayMonth(date);
+		Date lastDayMonthDate= UtilDate.lastDayMonth(date);
+		System.out.println(date.toString());
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		Query query = session.createQuery("SELECT ev FROM Event ev WHERE EVENTDATE BETWEEN :fecha1 and :fecha2");   
+		query.setParameter("fecha1", firstDayMonthDate);
+		query.setParameter("fecha2", lastDayMonthDate);
+		List<Event> dates = query.list();
+	 	return dates;
+	}
 }
