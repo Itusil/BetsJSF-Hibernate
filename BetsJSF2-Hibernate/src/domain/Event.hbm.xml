@@ -6,7 +6,7 @@
     <class name="domain.Event" table="EVENT">
         <id name="eventNumber" type="java.lang.Integer">
             <column name="EVENTNUMBER" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="description" type="java.lang.String">
             <column name="DESCRIPTION" />
@@ -14,7 +14,7 @@
         <property name="eventDate" type="java.util.Date">
             <column name="EVENTDATE" />
         </property>
-        <list name="questions" inverse="false" table="QUESTION" lazy="true">
+        <list name="questions" inverse="false" table="QUESTION" lazy="false">
             <key>
                 <column name="EVENTNUMBER" />
             </key>

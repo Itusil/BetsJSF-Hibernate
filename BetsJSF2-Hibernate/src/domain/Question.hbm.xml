@@ -6,7 +6,7 @@
     <class name="domain.Question" table="QUESTION">
         <id name="questionNumber" type="java.lang.Integer">
             <column name="QUESTIONNUMBER" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="question" type="java.lang.String">
             <column name="QUESTION" />
@@ -17,8 +17,8 @@
         <property name="result" type="java.lang.String">
             <column name="RESULT" />
         </property>
-        <many-to-one name="event" class="domain.Event" fetch="join">
-            <column name="EVENT" />
+        <many-to-one name="event" class="domain.Event" lazy="false" fetch="join">
+            <column name="EVENTNUMBER" />
         </many-to-one>
     </class>
 </hibernate-mapping>
