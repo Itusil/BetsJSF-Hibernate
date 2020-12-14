@@ -113,4 +113,18 @@ public class HibernateDataAccess {
 
 		session.getTransaction().commit();
 	}
+	
+		private void createAndStoreQuestion(String question, float betMinimum) { 
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		Question q = new Question();
+
+		q.setQuestion(question);
+		q.setBetMinimum(betMinimum);
+				
+		session.save(q);
+		session.getTransaction().commit();
+	}
 }
