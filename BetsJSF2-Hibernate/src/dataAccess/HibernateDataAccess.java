@@ -124,7 +124,7 @@ public class HibernateDataAccess {
 		session.getTransaction().commit();
 	}
 	
-		private void createAndStoreQuestion(String question, float betMinimum) { 
+		public void createAndStoreQuestion(String question, float betMinimum) { 
 		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
@@ -137,6 +137,18 @@ public class HibernateDataAccess {
 		session.save(q);
 		session.getTransaction().commit();
 	}
+	
+	
+		public List<Event> getEvents(Date date){
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			Query aux = session.createQuery("select ev from event ev where event.eventdate= :dateAux");
+			aux.setParameter("dateAux", date);
+			List result = aux.list();
+			session.getTransaction().commit();
+			return result;
+		}
+	
 	
 		public List<Event> getEventsMonth(Date date) {
 		System.out.println(">> DataAccess: getEventsMonth");
