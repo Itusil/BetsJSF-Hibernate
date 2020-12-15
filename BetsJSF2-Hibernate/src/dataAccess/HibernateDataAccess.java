@@ -1,8 +1,6 @@
 package dataAccess;
 
-import java.util.Calendar;
-import java.util.Locale;
-
+import java.util.*;
 import org.hibernate.Session;
 
 import configuration.UtilDate;
@@ -141,7 +139,6 @@ public class HibernateDataAccess {
 
 
 		session.save(q);
-		//session.save(event);
 		session.getTransaction().commit();
 	}
 	
