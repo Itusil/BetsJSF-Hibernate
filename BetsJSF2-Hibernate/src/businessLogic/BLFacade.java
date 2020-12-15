@@ -2,10 +2,7 @@ package businessLogic;
 
 import java.util.Vector;
 import java.util.Date;
-
-
-
-
+import java.util.List;
 
 //import domain.Booking;
 import domain.Question;
@@ -42,7 +39,7 @@ public interface BLFacade  {
 	 * @param date in which events are retrieved
 	 * @return collection of events
 	 */
-	@WebMethod public Vector<Event> getEvents(Date date);
+	@WebMethod public List<Event> getEvents(Date date);
 	
 	/**
 	 * This method retrieves from the database the dates a month for which there are events
@@ -50,7 +47,7 @@ public interface BLFacade  {
 	 * @param date of the month for which days with events want to be retrieved 
 	 * @return collection of dates
 	 */
-	@WebMethod public Vector<Date> getEventsMonth(Date date);
+	@WebMethod public List<Date> getEventsMonth(Date date);
 	
 	/**
 	 * This method calls the data access to initialize the database with some events and questions.

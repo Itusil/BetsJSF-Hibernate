@@ -1,6 +1,8 @@
 package dataAccess;
 
 import java.util.*;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import configuration.UtilDate;
@@ -122,7 +124,7 @@ public class HibernateDataAccess {
 		session.getTransaction().commit();
 	}
 	
-		private void createAndStoreQuestion(Event event, String question, float betMinimum) { 
+		public Question createAndStoreQuestion(Event event, String question, float betMinimum) { 
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
@@ -132,21 +134,26 @@ public class HibernateDataAccess {
 		q.setQuestion(question);
 		q.setBetMinimum(betMinimum);
 
-		HashSet es = new HashSet();
-		es.add(event);
 		q.setEvent(event);
 
-
-
+		Query aux = session.createQuery("from Event where eventNumber= :numid");
+		aux.setParameter("numid", event.getEventNumber());
+		List l = aux.list();
+		Event e = (Event)l.get(0);
+		List<Question> l2 = e.getQuestions();
+		l2.add(q);
+		e.setQuestions(l2);
 		session.save(q);
+		session.save(e);
 		session.getTransaction().commit();
+		return q;
 	}
 	
 	
 		public List<Event> getEvents(Date date){
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			session.beginTransaction();
-			Query aux = session.createQuery("select ev from event ev where event.eventdate= :dateAux");
+			Query aux = session.createQuery("from Event where eventdate= :dateAux");
 			aux.setParameter("dateAux", date);
 			List result = aux.list();
 			session.getTransaction().commit();
@@ -154,7 +161,7 @@ public class HibernateDataAccess {
 		}
 	
 	
-		public List<Event> getEventsMonth(Date date) {
+		public List<Date> getEventsMonth(Date date) {
 		System.out.println(">> DataAccess: getEventsMonth");
 		
 		Date firstDayMonthDate= UtilDate.firstDayMonth(date);
@@ -162,10 +169,10 @@ public class HibernateDataAccess {
 		System.out.println(date.toString());
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		Query query = session.createQuery("SELECT ev FROM Event ev WHERE EVENTDATE BETWEEN :fecha1 and :fecha2");   
+		Query query = session.createQuery("SELECT ev.eventDate FROM Event ev WHERE EVENTDATE BETWEEN :fecha1 and :fecha2");   
 		query.setParameter("fecha1", firstDayMonthDate);
 		query.setParameter("fecha2", lastDayMonthDate);
-		List<Event> dates = query.list();
+		List<Date> dates = query.list();
 	 	return dates;
 	}
 }

@@ -84,7 +84,7 @@ public class MenuBean {
 	}
 	public void onDateSelect(SelectEvent event) {
 		eventos=new ArrayList<Event>();
-		Vector<Event> j = bl.getEvents(getFecha());
+		List<Event> j = bl.getEvents(getFecha());
 		Iterator<Event> jit = j.iterator();
 		while (jit.hasNext()) {
 			eventos.add(jit.next());
@@ -138,7 +138,7 @@ public class MenuBean {
 	
 	public void refrescarEventos() {
 		eventos=new ArrayList<Event>();
-		Vector<Event> j = bl.getEvents(getFecha());
+		List<Event> j = bl.getEvents(getFecha());
 		Iterator<Event> jit = j.iterator();
 		while (jit.hasNext()) {
 			eventos.add(jit.next());

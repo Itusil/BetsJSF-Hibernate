@@ -2,6 +2,7 @@ package businessLogic;
 
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -10,6 +11,7 @@ import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
+import dataAccess.HibernateDataAccess;
 import domain.Question;
 import domain.Event;
 import exceptions.EventFinished;
@@ -22,14 +24,15 @@ import exceptions.QuestionAlreadyExist;
 public class BLFacadeImplementation  implements BLFacade {
 
 	public BLFacadeImplementation()  {		
-		System.out.println("Creating BLFacadeImplementation instance");
-		ConfigXML c=ConfigXML.getInstance();
-		if (c.getDataBaseOpenMode().equals("initialize")) {
-			DataAccess dbManager=new DataAccess(c.getDataBaseOpenMode().equals("initialize"));
-			dbManager.initializeDB();
-			dbManager.close();
-			}
-		
+//		System.out.println("Creating BLFacadeImplementation instance");
+//		ConfigXML c=ConfigXML.getInstance();
+//		if (c.getDataBaseOpenMode().equals("initialize")) {
+//			//DataAccess dbManager=new DataAccess(c.getDataBaseOpenMode().equals("initialize"));
+//			//dbManager.initializeDB();
+//			//dbManager.close();
+//			
+//			}	
+		HibernateDataAccess dbManager = new HibernateDataAccess(true);
 	}
 	
 
@@ -47,17 +50,19 @@ public class BLFacadeImplementation  implements BLFacade {
    public Question createQuestion(Event event, String question, float betMinimum) throws EventFinished, QuestionAlreadyExist{
 	   
 	    //The minimum bed must be greater than 0
-	    DataAccess dBManager=new DataAccess();
-		Question qry=null;
+	    
+	   //DataAccess dBManager=new DataAccess();
+	   HibernateDataAccess dbManager = new HibernateDataAccess();
+	   Question qry=null;
 		
 	    
 		if(new Date().compareTo(event.getEventDate())>0)
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished"));
 				
 		
-		 qry=dBManager.createQuestion(event,question,betMinimum);		
+		 qry=dbManager.createAndStoreQuestion(event, question, betMinimum);		
 
-		dBManager.close();
+		//dBManager.close();
 		
 		return qry;
    };
@@ -69,10 +74,11 @@ public class BLFacadeImplementation  implements BLFacade {
 	 * @return collection of events
 	 */
     @WebMethod	
-	public Vector<Event> getEvents(Date date)  {
-		DataAccess dbManager=new DataAccess();
-		Vector<Event>  events=dbManager.getEvents(date);
-		dbManager.close();
+	public List<Event> getEvents(Date date)  {
+		//DataAccess dbManager=new DataAccess();
+    	HibernateDataAccess dbManager = new HibernateDataAccess();
+		List<Event>  events= dbManager.getEvents(date);
+		//dbManager.close();
 		return events;
 	}
 
@@ -83,10 +89,11 @@ public class BLFacadeImplementation  implements BLFacade {
 	 * @param date of the month for which days with events want to be retrieved 
 	 * @return collection of dates
 	 */
-	@WebMethod public Vector<Date> getEventsMonth(Date date) {
-		DataAccess dbManager=new DataAccess();
-		Vector<Date>  dates=dbManager.getEventsMonth(date);
-		dbManager.close();
+	@WebMethod public List<Date> getEventsMonth(Date date) {
+		//DataAccess dbManager=new DataAccess();
+		HibernateDataAccess dbManager = new HibernateDataAccess();
+		List<Date> dates = dbManager.getEventsMonth(date);
+		//dbManager.close();
 		return dates;
 	}
 	
@@ -99,9 +106,10 @@ public class BLFacadeImplementation  implements BLFacade {
 	 */	
     @WebMethod	
 	 public void initializeBD(){
-		DataAccess dBManager=new DataAccess();
-		dBManager.initializeDB();
-		dBManager.close();
+		//DataAccess dBManager=new DataAccess();
+		HibernateDataAccess dbManager = new HibernateDataAccess();
+		dbManager.initializeDB();
+		//dBManager.close();
 	}
 
 }
