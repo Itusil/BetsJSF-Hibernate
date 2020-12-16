@@ -14,11 +14,6 @@
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Bets/libs/objectdb.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libs/omnifaces-1.8.1 (1).jar">
 		<attributes>
@@ -26,11 +21,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="libs/primefaces-4.0.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Bets/libs/jcalendar-1.4.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
@@ -90,5 +80,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Mikel Iturria/eclipse-workspace/Bets/libs/jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

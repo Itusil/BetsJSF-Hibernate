@@ -124,7 +124,7 @@ public class CreateQuestionGUI extends JFrame {
 					try {
 						BLFacade facade = MainGUI.getBusinessLogic();
 
-						Vector<domain.Event> events = facade.getEvents(firstDay);
+						Vector<domain.Event> events = (Vector<Event>) facade.getEvents(firstDay);
 
 						if (events.isEmpty())
 							jLabelListOfEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents")
@@ -209,7 +209,7 @@ public class CreateQuestionGUI extends JFrame {
 
 		BLFacade facade = MainGUI.getBusinessLogic();
 
-		Vector<Date> dates=facade.getEventsMonth(jCalendar.getDate());
+		Vector<Date> dates=(Vector<Date>) facade.getEventsMonth(jCalendar.getDate());
 			
 		Calendar calendar = jCalendar.getCalendar();
 		
