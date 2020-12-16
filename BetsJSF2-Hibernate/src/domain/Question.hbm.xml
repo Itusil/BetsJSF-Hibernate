@@ -17,7 +17,7 @@
         <property name="result" type="java.lang.String">
             <column name="RESULT" />
         </property>
-        <many-to-one name="event" class="domain.Event" lazy="false" fetch="join">
+        <many-to-one name="event" class="domain.Event" cascade = "delete" lazy="false" fetch="join">
             <column name="EVENTNUMBER" />
         </many-to-one>
     </class>
